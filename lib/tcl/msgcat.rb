@@ -11,7 +11,7 @@ module Tcl
     end
 
     def render(json_file)
-      raise ArgumentError, "File not found" unless File.exist? json_file
+      raise ArgumentError, "File not found: #{json_file}" unless File.exist? json_file
       msgs = JSON.parse(File.read(json_file))
       Tcl::Msgcat::Renderer.new(msgs).render
     end
