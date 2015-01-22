@@ -1,7 +1,7 @@
 module Tcl
   module Msgcat
     class Renderer
-      attr_reader :msgs
+      attr_reader :msgs, :lines
       def initialize(msgs)
         @msgs  = msgs
         @lines = []
