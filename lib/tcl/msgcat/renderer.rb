@@ -12,6 +12,8 @@ module Tcl
         @lines << "msg_lang {}"
         @lines << ""
         _render(@msgs)
+
+        self
       end
 
       def to_s
