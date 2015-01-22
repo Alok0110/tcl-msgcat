@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'tcl-msgcat'
+
+case ARGV[0]
+when "parse", "p"
+  file = ARGV[1]
+  puts Tcl::Msgcat.parse(file).to_json
+when "render", "r"
+  file = ARGV[1]
+  puts Tcl::Msgcat.render(file).to_s
+when "merge", "m"
+  root = ARGV[1]
+  files = ARGV[2..-1]
+  Tcl::Msgcat.merge(root, files)
+else
+  puts <<-EOH
+Usage: msgcat <action> <arguments>
+
+Actions:
+  parse <file>            Parse a msgcat file and output JSON
+  render <file>           Parse a JSON file and output msgcat
+  merge <root> <files>    Merge new keys from root into the files (glob pattern)
+
+Examples:
+  msgcat parse ROOT.msg > root.json
+  msgcat render root.json > ROOT.msg
+  msgcat merge root.json path/to/translations/*.json
+  msgcat merge root.json zh_tw.json fr.json de.json
+  EOH
+end
