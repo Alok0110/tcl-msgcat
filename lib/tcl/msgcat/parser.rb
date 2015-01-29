@@ -32,6 +32,7 @@ module Tcl
 
           # end of the message group/namespace definition
           if match = line.match(/\}/)             # }
+            next unless line.strip == "}"
             scopes.pop
             next
           end
