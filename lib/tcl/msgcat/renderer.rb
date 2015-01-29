@@ -29,6 +29,7 @@ module Tcl
       def _render(msgs, level=0)
         msgs.each do |key, value|
           if value.is_a? Hash
+            @lines << ""
             @lines << "msgs #{key} {".rpad("  ", level)
             level+=1
             _render(value, level) # render any child hashes or translation labels/strings
