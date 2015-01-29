@@ -12,7 +12,7 @@ module Tcl
       end
 
       def to_json(pretty=true)
-        @msgs.to_json
+        pretty ? JSON.pretty_generate(@msgs) : @msgs.to_json
       end
 
       def self.load(file)
