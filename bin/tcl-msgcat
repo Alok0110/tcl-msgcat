@@ -33,12 +33,12 @@ Actions:
   c|compile <source> [target]  Compile from the source into the target
 
 Examples:
-  msgcat parse ROOT.msg > root.json
-  msgcat uglify ROOT.msg > root.json
-  msgcat render root.json > ROOT.msg
-  msgcat merge root.json path/to/translations/*.json
-  msgcat merge root.json zh_tw.json fr.json de.json
-  msgcat compile path/to/my/json/files path/to/my/msgcat/files
-  msgcat compile path/to/my/json/msgcat/files
+  tcl-msgcat parse ROOT.msg > root.json
+  tcl-msgcat uglify ROOT.msg > root.json
+  tcl-msgcat render root.json > ROOT.msg
+  tcl-msgcat merge root.json path/to/translations/*.json
+  tcl-msgcat merge root.json zh_tw.json fr.json de.json
+  tcl-msgcat compile path/to/my/json/files path/to/my/msgcat/files
+  tcl-msgcat compile path/to/my/json/msgcat/files
   EOH
 end
