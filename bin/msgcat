@@ -6,6 +6,9 @@ case ARGV[0]
 when "parse", "p"
   file = ARGV[1]
   puts Tcl::Msgcat.parse(file).to_json
+when "uglify", "u"
+  file = ARGV[1]
+  puts Tcl::Msgcat.parse(file).to_json(false)
 when "render", "r"
   file = ARGV[1]
   puts Tcl::Msgcat.render(file).to_s
