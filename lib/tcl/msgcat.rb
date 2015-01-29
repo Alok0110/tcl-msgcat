@@ -3,6 +3,11 @@ require "tcl/msgcat/version"
 require "tcl/msgcat/catalog"
 require "tcl/msgcat/parser"
 require "tcl/msgcat/renderer"
+require "tcl/msgcat/paddable_string"
+
+class String
+  include Tcl::Msgcat::PaddableString
+end
 
 module Tcl
   module Msgcat
