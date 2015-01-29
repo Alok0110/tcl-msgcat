@@ -11,6 +11,10 @@ module Tcl
         @msgs = catalog.msgs.merge(@msgs, &merger)
       end
 
+      def to_json(pretty=true)
+        @msgs.to_json
+      end
+
       def self.load(file)
         msgs = JSON.parse(File.read(file))
         Tcl::Msgcat::Catalog.new(msgs)
