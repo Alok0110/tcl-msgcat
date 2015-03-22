@@ -11,7 +11,11 @@ when "uglify", "u"
   puts Tcl::Msgcat.parse(file).to_json(false)
 when "render", "r"
   file = ARGV[1]
-  puts Tcl::Msgcat.render(file).to_s
+  begin
+    puts Tcl::Msgcat.render(file).to_s
+  rescue MultiJson::ParseError => e
+    abort "ERROR: Invalid JSON: #{e.message}"
+  end
 when "merge", "m"
   root = ARGV[1]
   files = ARGV[2..-1]

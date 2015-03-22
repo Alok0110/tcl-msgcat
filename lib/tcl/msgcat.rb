@@ -20,8 +20,8 @@ module Tcl
 
       def render(json_file)
         raise ArgumentError, "File not found: #{json_file}" unless File.exist? json_file
-        msgs = JSON.parse(File.read(json_file))
         Tcl::Msgcat::Renderer.new(msgs).render
+        msgs = MultiJson.load(File.read(json_file))
       end
 
       def merge(root_file, translation_files=[])
@@ -29,15 +29,23 @@ module Tcl
           translation_files = Dir[translation_files]
         end
 
-        root = Tcl::Msgcat::Catalog.load(root_file)
+        begin
+          root = Tcl::Msgcat::Catalog.load(root_file)
+        rescue MultiJson::ParseError => e
+          raise MultiJson::ParseError, "Failed to parse #{root_file}: #{e.message}"
+        end
 
         translation_files.each do |file|
-          next if File.basename(file) == File.basename(root_file)
-          print "Merging new translations into #{file}... "
-          catalog = Tcl::Msgcat::Catalog.load(file)
-          catalog.merge!(root)
-          File.open(file, "w") {|f| f.write catalog.to_json }
-          puts "done"
+          begin
+            next if File.basename(file) == File.basename(root_file)
+            print "Merging new translations into #{file}... "
+            catalog = Tcl::Msgcat::Catalog.load(file)
+            catalog.merge!(root)
+            File.open(file, "w") {|f| f.write catalog.to_json }
+            puts "done"
+          rescue MultiJson::ParseError => e
+            raise MultiJson::ParseError, "Failed to parse #{file}: #{e.message}"
+          end
         end
       end
 

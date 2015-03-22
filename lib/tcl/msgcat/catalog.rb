@@ -16,7 +16,7 @@ module Tcl
       end
 
       def self.load(file)
-        msgs = JSON.parse(File.read(file))
+        msgs = MultiJson.load(File.read(file))
         Tcl::Msgcat::Catalog.new(msgs)
       end
     end
