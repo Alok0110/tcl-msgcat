@@ -1,5 +1,7 @@
 # Tcl::Msgcat
 
+[![Gem Version](https://badge.fury.io/rb/tcl-msgcat.svg)](http://badge.fury.io/rb/tcl-msgcat)
+
 Library for parsing, rendering and merging TCL msgcat (read i18n) files.
 
 TCL msgcat files are yuk, and a legacy format.  Unfortunately some of us are stuck with systems that still use these files
