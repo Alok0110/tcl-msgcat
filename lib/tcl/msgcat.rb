@@ -20,8 +20,9 @@ module Tcl
 
       def render(json_file)
         raise ArgumentError, "File not found: #{json_file}" unless File.exist? json_file
-        Tcl::Msgcat::Renderer.new(msgs).render
         msgs = MultiJson.load(File.read(json_file))
+        lang = File.basename(json_file, File.extname(json_file))
+        Tcl::Msgcat::Renderer.new(msgs, lang).render
       end
 
       def merge(root_file, translation_files=[])

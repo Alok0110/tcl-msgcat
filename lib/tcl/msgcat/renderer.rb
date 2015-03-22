@@ -2,14 +2,21 @@ module Tcl
   module Msgcat
     class Renderer
       attr_reader :msgs, :lines
-      def initialize(msgs)
+      def initialize(msgs, lang=nil)
         @msgs  = msgs
+        @lang  = lang
         @lines = []
       end
 
       def render
         @lines << "package require mchelper"
-        @lines << "msg_lang {}"
+        
+        if (@lang.nil? or @lang.downcase == "root")
+          @lines << "msg_lang {}"
+        else
+          @lines << "msg_lang #{@lang}"
+        end
+
         @lines << ""
         _render(@msgs)
 
