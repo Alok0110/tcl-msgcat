@@ -57,10 +57,12 @@ module Tcl
         Dir["#{source}/*.json"].each do |src|
           dst = File.basename(src, ".json")+".msg"
           print "Compiling #{src} to #{target}/#{dst}... "
-          msgs = JSON.parse(File.read(src))
-          renderer = Tcl::Msgcat::Renderer.new(msgs).render
-          File.write("#{target}/#{dst}") {|f| f.write renderer.to_s }
-          puts "done"
+          begin
+            File.write("#{target}/#{dst}") {|f| f.write render(src) }
+            puts "done"
+          rescue ArgumentError => e
+            puts e.message
+          end
         end
       end
     end
