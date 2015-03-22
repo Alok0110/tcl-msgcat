@@ -1,4 +1,6 @@
 require 'json'
+require 'oj'
+require 'multi_json'
 require "tcl/msgcat/version"
 require "tcl/msgcat/catalog"
 require "tcl/msgcat/parser"
