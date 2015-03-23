@@ -58,7 +58,7 @@ module Tcl
           dst = File.basename(src, ".json")+".msg"
           print "Compiling #{src} to #{target}/#{dst}... "
           begin
-            File.write("#{target}/#{dst}") {|f| f.write render(src) }
+            File.write("#{target}/#{dst}", "w") {|f| f.write render(src) }
             puts "done"
           rescue ArgumentError => e
             puts e.message
